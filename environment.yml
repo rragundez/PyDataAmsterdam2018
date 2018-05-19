@@ -1,10 +1,14 @@
 name: pydata
 channels:
+  - damianavila82
   - defaults
 dependencies:
-  - nb_conda=2.2.1
-  - python=3.6.5
   - matplotlib=2.2.2
+  - nb_conda=2.2.1
+  - numpy=1.14.2
+  - pillow=5.1.0
+  - python=3.6.5
+  - seaborn=0.8.1=py36hfad7ec4_0
   - pip:
     - keras==2.1.6
     - tensorflow==1.8.0

@@ -4,6 +4,7 @@ import time
 
 from datetime import timedelta
 from itertools import groupby
+from PIL import Image
 from statistics import mean
 
 import matplotlib.pyplot as plt
@@ -12,7 +13,33 @@ import tensorflow as tf
 
 from keras import layers
 from keras.callbacks import Callback
+from keras.models import Model
 from keras.models import Sequential
+
+
+def make_inceptionV3_custom_model(base_model):
+    # get base model output
+    x = base_model.output
+    # add GlobalAveragePooling2D layer
+    x = layers.GlobalAveragePooling2D(name='CustomLayer_1')(x)
+    # add Dense layer of 512 units
+    x = layers.Dense(name='CustomLayer_2', units=512, activation='relu')(x)
+    # add output Dense layer with 10 units and softmax activation function
+    predictions = layers.Dense(name='OutputLayer',
+                               units=10, activation='softmax')(x)
+    model = Model(inputs=base_model.input, outputs=predictions)
+    return model
+
+
+def save_keras_dataset_to_disk(X_train, y_train, X_test, y_test):
+    for i, x_img in enumerate(X_train):
+        label = y_train[i, 0]
+        os.makedirs(f'data/CIFAR10/train/{label}', exist_ok=True)
+        Image.fromarray(x_img).save(f"data/CIFAR10/train/{label}/{i}.jpeg")
+    for i, x_img in enumerate(X_test):
+        label = y_test[i, 0]
+        os.makedirs(f'data/CIFAR10/test/{label}', exist_ok=True)
+        Image.fromarray(x_img).save(f"data/CIFAR10/test/{label}/{i}.jpeg")
 
 
 def make_CNN_model():
