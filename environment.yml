@@ -1,0 +1,10 @@
+name: pydata
+channels:
+  - defaults
+dependencies:
+  - nb_conda=2.2.1
+  - python=3.6.5
+  - matplotlib=2.2.2
+  - pip:
+    - keras==2.1.6
+    - tensorflow==1.8.0
