@@ -15,6 +15,37 @@ from keras.callbacks import Callback
 from keras.models import Sequential
 
 
+def make_CNN_model():
+    model = Sequential()
+    # input layer transformation (BatchNormalization + Dropout)
+    model.add(layers.BatchNormalization(name='InputLayer',
+                                        input_shape=(28, 28, 1)))
+    model.add(layers.Dropout(name='Dropout_InputLayer', rate=0.3))
+
+    # convolutional layer (Conv2D + MaxPooling2D + Flatten + Dropout)
+    model.add(layers.Conv2D(name='ConvolutionalLayer_1',
+                            filters=32,
+                            kernel_size=(3, 3),
+                            activation='relu',
+                            border_mode="same"))
+    model.add(layers.MaxPooling2D(name='MaxPooling_1'))
+    model.add(layers.Flatten(name='Flatten_1'))
+    model.add(layers.Dropout(rate=0.3))
+
+    # fully connected layer (Dense + BatchNormalization + Activation + Dropout)
+    model.add(layers.Dense(name='FullyConnectedLayer_2', units=150))
+    model.add(layers.BatchNormalization())
+    model.add(layers.Activation('relu'))
+    model.add(layers.Dropout(rate=0.3))
+
+    # output layer (Dense + BatchNormalization + Activation)
+    model.add(layers.Dense(name='OutputLayer', units=10))
+    model.add(layers.BatchNormalization())
+    model.add(layers.Activation('sigmoid'))
+
+    return model
+
+
 def make_overkill_model():
     model = Sequential()
     # input layer transformation
