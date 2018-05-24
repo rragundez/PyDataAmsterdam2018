@@ -1,6 +1,15 @@
 # PyDataAmsterdam2018
 Contents of the workshop ["Hands-on introduction to Deep Learning with Keras and Tensorflow"](https://pydata.org/amsterdam2018/schedule/) I gave at PyData Amsterdam 2018.
 
+#### Create the conda environment
+```
+conda env create -f environment.yml
+```
+#### Launch jupyter notebooks from repo root folder
+```
+jupyter notebook
+```
+
 **Audience level**: Novice
 
 ## Description
