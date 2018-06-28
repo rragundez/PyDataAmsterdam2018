@@ -4,7 +4,7 @@ channels:
   - defaults
 dependencies:
   - matplotlib=2.2.2
-  - nb_conda=2.2.1
+  - nb_conda_kernels
   - numpy=1.14.2
   - pillow=5.1.0
   - python=3.6.5
